@@ -1,13 +1,10 @@
 * {
     box-sizing: border-box;
   }
-  
-  body {
+body {
     height: 100vh;
     margin: 0;
   }
-  
-  
   .grid-wrapper {
     height: 100vh;
     display: flex;
@@ -32,9 +29,9 @@
     height: 10%;
     width: 10%;
   }
-  
-  .grid div.cat {
-    background-image: url('../assets/pngtree-gray-blue-eyed-plush-cute-kitten-hand-painted-elements-png-image_920814.jpeg');
+
+  .grid div.snake {
+    background-image: url('../assets/pngtree-snake-head-cartoon-png-image_3733264.jpeg');
     background-repeat: no-repeat;
     background-size: contain;
     cursor: pointer;
