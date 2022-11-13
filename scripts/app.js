@@ -7,11 +7,14 @@ function init() {
   const cellCount = width * width // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create
 
+  const foodForSnake = "food" 
+  const foodStartPosition = 0
+  let foodCurrentPostion = 0 
 
   const snakeClass = "snake" // define the class of the character
-  const snakeStartPosition = 0 // starting position of the cat (refers to an index)
-  let snakeCurrentPosition = 0 // use let to track where the cat currently is (refers to an index)
-
+  const snakeStartPosition = 44 // starting position of the cat (refers to an index)
+  let snakeCurrentPosition = 44 // use let to track where the cat currently is (refers to an index)
+// 
 
   // * Make a grid
   const createGrid = (snakeStartPosition) => {
@@ -21,40 +24,56 @@ function init() {
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
-    // addSnake(snakeStartPosition) // call the function to add the cat at its starting position
+
+    addSnake(snakeStartPosition) // call the function to add the cat at its starting position
+    addFood(foodStartPosition) 
   }
     
-// * Add Cat to grid
-function addSnake(position) { // takes argument so function is reusable
-  //   console.log(‘POSITION BEING PASSED IN —>’, position)
-  //   console.log(‘CELL WE ARE PICKING USING THE POSITION INDEX BEING PASSED IN —>’, cells[position])
+// Add food 
+
+const addFood = (position) => {
+  cells[position].classList.add(foodForSnake)
+}
+
+
+  // * Add Cat to grid
+const addSnake = (position) => { // takes argument so function is reusable
     cells[position].classList.add(snakeClass) // use position as index to pick the corresponding div from the array of cells and add the class of cat
   }
+// * Remove cat from current position 
+
+const removeSnake = (position) => {
+    
+  cells[position].classList.remove(snakeClass)
+}
+
+// * Move snake
 
 
-// *move snake
-
-
-function handleKeyUp(event) {
+const handleKeyUp = (event) => {
   const key = event.keyCode // press button 
-  console.log('event', event)
-  console.log("POSITION BEFORE REDEFINING —>", snakeCurrentPosition)
-  // removeSnake(snakeCurrentPosition) // remove the cat from its current position
+  //  
+  removeSnake(snakeCurrentPosition) // remove the cat from its current position
   
+  // when firing handlekeyup both remove and add snake are being fired within the same function.
+// removes the snake only after its fired again - line by line code- 
   if (key === 39 && snakeCurrentPosition % width !== width - 1) { // if the right arrow is pressed and the cat is not on the right edge
-    snakeCurrentPosition++ // redefine cat position index to be previous position plus 1
+    snakeCurrentPosition++ // add 1 to the current position.
   } else if (key === 37 && snakeCurrentPosition % width !== 0) { // if the left arrow is pressed and the cat is not on the left edge
-    snakeCurrentPosition-- // redefine cat position index to be previous position minus 1
+    snakeCurrentPosition-- // removes 1 from the current position
   } else if (key === 38 && snakeCurrentPosition >= width) { // if the up arrow is pressed and the cat is not on the top row
-    snakeCurrentPosition -= width // redefine cat position index to be previous position minus width
+    snakeCurrentPosition -= width // minus 10 from current position
   } else if (key === 40 && snakeCurrentPosition + width <= width * width - 1) { // if the down arrow is pressed and the cat is not on the bottom row
-    snakeCurrentPosition += width // redefine cat position index to be previous position plus width
+    snakeCurrentPosition += width // adds 10 to current position
   } else {
     // console.log(‘INVALID KEY’) // any other key, log invalid key
   }
 //   console.log(‘POSITION AFTER REDEFINING —>’, catCurrentPosition)
   addSnake(snakeCurrentPosition) // add cat to the new position that was defined in the if statement above
+  
+
 }
+
 
 // * Event listeners
 document.addEventListener("keyup", handleKeyUp) // 

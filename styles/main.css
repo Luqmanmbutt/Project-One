@@ -36,3 +36,9 @@ body {
     background-size: contain;
     cursor: pointer;
   }
+  .grid div.food {
+    background-image: url('../assets/pngtree-burger-vector-illustration-with-filled-line-design-burger-clip-art-png-image_1923564.jpeg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
