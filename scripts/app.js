@@ -12,8 +12,8 @@ function init() {
   // let foodCurrentPostion = 0
 
   const snakeClass = "snake" // define the class of the character
-  const snakeStartPosition = 44 // starting position of the cat (refers to an index)
-  let snakeCurrentPosition = 44 // use let to track where the cat currently is (refers to an index)
+  const snakeStartPosition = [44, 43, 42]// starting position of the cat (refers to an index)
+  let snakeCurrentPosition = 44  // use let to track where the cat currently is (refers to an index)
 // 
 
   // * Make a grid
@@ -25,7 +25,7 @@ function init() {
       cells.push(cell) // add the newly created div into our empty array
     }
 
-    addSnake(snakeStartPosition) // call the function to add the cat at its starting position
+    addSnake(snakeStartPosition) // call the function to add the snake at its starting position
     addFood(foodStartPosition) 
   }
     
@@ -39,12 +39,27 @@ const addFood = (position) => {
 
 console.log(foodStartPosition)
 
-  // * Add Cat to grid
-const addSnake = (position) => { // takes argument so function is reusable
-    cells[position].classList.add(snakeClass) // use position as index to pick the corresponding div from the array of cells and add the class of cat
-  }
-// * Remove cat from current position 
 
+  // JUST FOR TESTING, DELETE AFTER DONE.
+  const addSnake = (position) => { 
+  /* snakeStartPosition is an array with 3 numbers [42, 43, 44] 
+     the forEach breaks the array, and accesses 3 the numbers and stores them in 'x'. so x = 44, x = 43 and x = 42
+     then whatever you write inside the foreach BLOCK, it does that command to each of those numbers. 
+  */ 
+    snakeStartPosition.forEach(x => {
+      cells[x].classList.add(snakeClass) 
+    })
+  
+  }
+
+
+
+  // * Add snake to grid (uncomment function after testing is done )
+// const addSnake = (position) => { // takes argument so function is reusable
+//     cells[position].classList.add(snakeClass) // use position as index to pick the corresponding div from the array of cells and add the class of cat
+//   }
+
+// * Remove snake from current position 
 const removeSnake = (position) => {
     
   cells[position].classList.remove(snakeClass)
@@ -55,7 +70,7 @@ const removeSnake = (position) => {
 
 const snakeMove = () => {
   
-  console.log('test')
+  // console.log('test')
   
 }
 
