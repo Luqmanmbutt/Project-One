@@ -3,13 +3,13 @@ function init() {
   // * Variables
   const grid = document.querySelector(".grid") // get the grid element
   
-  const width = 10 // define the width
+  const width = 10 // define the width ---- YOU STORE THINGS INSIDE A VARIABLE.
   const cellCount = width * width // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create
 
   const foodForSnake = "food" 
-  const foodStartPosition = 0
-  let foodCurrentPostion = 0 
+  const foodStartPosition = Math.floor(Math.random() * 100)
+  // let foodCurrentPostion = 0
 
   const snakeClass = "snake" // define the class of the character
   const snakeStartPosition = 44 // starting position of the cat (refers to an index)
@@ -35,6 +35,9 @@ const addFood = (position) => {
   cells[position].classList.add(foodForSnake)
 }
 
+// foodCurrentPostion = Math.floor(Math.random() * 100)
+
+console.log(foodStartPosition)
 
   // * Add Cat to grid
 const addSnake = (position) => { // takes argument so function is reusable
@@ -48,6 +51,26 @@ const removeSnake = (position) => {
 }
 
 // * Move snake
+
+
+const snakeMove = () => {
+  
+  console.log('test')
+  
+}
+
+setInterval(snakeMove, 1000)
+
+snakeMove()
+
+// const moveSnake = document.getElementById("demo");
+// setInterval(function() {element.innerHTML += "Hello"}, 1000);
+
+// console.log(moveSnake)
+
+// const setInterval = () => {
+//    {element.innerHTML += 'hello'}, 1000;
+// }
 
 
 const handleKeyUp = (event) => {
@@ -81,6 +104,10 @@ document.addEventListener("keyup", handleKeyUp) //
 createGrid(snakeStartPosition) // pass function the starting position of the cat
 
 // handleKeyUp()
+
+
+
+
 
 
 
