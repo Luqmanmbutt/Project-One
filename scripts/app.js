@@ -52,21 +52,15 @@ console.log(foodStartPosition)
   
   }
 
-
-
-  // * Add snake to grid (uncomment function after testing is done )
-// const addSnake = (position) => { // takes argument so function is reusable
-//     cells[position].classList.add(snakeClass) // use position as index to pick the corresponding div from the array of cells and add the class of cat
-//   }
-
 // * Remove snake from current position 
 const removeSnake = (position) => {
-    
-  cells[position].classList.remove(snakeClass)
+    cells[position].classList.remove(snakeClass)
+    snakeStartPosition.pop()
 }
 
+ 
+// remove the last element in the snake array 
 // * Move snake
-
 
 const snakeMove = () => {
   
