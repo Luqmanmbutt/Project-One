@@ -14,7 +14,7 @@
 // snake dies if it touches himself 
 //  only clearinterval when snake dies
 //
-//  
+//  new variable called snakeDirection which will be updated with strings up, down, left, right 
 //
 //
 //

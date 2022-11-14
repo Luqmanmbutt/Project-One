@@ -37,17 +37,15 @@ const addFood = (position) => {
 
 // foodCurrentPostion = Math.floor(Math.random() * 100)
 
-console.log(foodStartPosition)
 
-
-  // JUST FOR TESTING, DELETE AFTER DONE.
   const addSnake = (position) => { 
   /* snakeStartPosition is an array with 3 numbers [42, 43, 44] 
      the forEach breaks the array, and accesses 3 the numbers and stores them in 'x'. so x = 44, x = 43 and x = 42
      then whatever you write inside the foreach BLOCK, it does that command to each of those numbers. 
   */ 
-    snakeStartPosition.forEach(x => {
+     snakeStartPosition.forEach(x => {
       cells[x].classList.add(snakeClass) 
+      console.log('test', snakeStartPosition)
     })
   
   }
@@ -55,10 +53,10 @@ console.log(foodStartPosition)
 // * Remove snake from current position 
 const removeSnake = (position) => {
     cells[position].classList.remove(snakeClass)
-    snakeStartPosition.pop()
+    // snakeStartPosition.pop()
 }
 
- 
+
 // remove the last element in the snake array 
 // * Move snake
 
