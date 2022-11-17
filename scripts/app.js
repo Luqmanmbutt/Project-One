@@ -14,9 +14,9 @@ function init() {
   const snakeClass = "snake" // define the class of the character
   const snakeStartPosition = [44, 43, 42]// starting position of the cat (refers to an index)
   let snakeCurrentPosition = [224, 223, 222]  // use let to track where the cat currently is (refers to an 
-  let snakeDirection 
+  let snakeDirection = 'right'
   let snakeTimer 
-  const speed = 1500
+  const speed = 1000
 
 
   // * Make a grid
@@ -37,6 +37,11 @@ function init() {
 const addFood = (position) => {
   cells[position].classList.add(foodForSnake)
 }
+
+const checkFoodBeingEatan = () => {
+  console.log('checkFoodBeingEatan', foodStartPosition)
+}
+checkFoodBeingEatan()
 
 // foodCurrentPostion = Math.floor(Math.random() * 100)
 
@@ -70,20 +75,27 @@ const snakeMove = () => {
   snakeTimer = setInterval(() => {
     
     
+    checkFoodBeingEatan()
+    
+    
+    
+    
+    
+    
     
     if (snakeDirection === 'right' && snakeCurrentPosition[0] % width !== width - 1) {
       removeSnake()
-      console.log('snakeCurrentPosition before', snakeCurrentPosition)
+      // console.log('snakeCurrentPosition before', snakeCurrentPosition)
       snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) // add a new item (number) to the beginning of the array 
       snakeCurrentPosition.pop()
-      console.log('snakeCurrentPosition after', snakeCurrentPosition)
+      // console.log('snakeCurrentPosition after', snakeCurrentPosition)
       addSnake()
 
     } else if (snakeDirection === 'left' && snakeCurrentPosition[0] % width !== 0) {
       removeSnake()
       // console.log('snakeCurrentPosition before', snakeCurrentPosition)
-      snakeCurrentPosition.push(snakeCurrentPosition[2] - 1)
-      snakeCurrentPosition.shift()
+      snakeCurrentPosition.unshift(snakeCurrentPosition[0] - 1)
+      snakeCurrentPosition.pop()
       // console.log('snakeCurrentPosition after', snakeCurrentPosition)
       addSnake() 
     }
@@ -94,13 +106,13 @@ const snakeMove = () => {
       snakeCurrentPosition.pop()
       // console.log('snakeCurrentPosition after', snakeCurrentPosition)
       addSnake()
-
-
-
     }
-  
-  
-  
+      else if (snakeDirection === 'down' && snakeCurrentPosition[0] + width <= width * width - 1) {
+        removeSnake()
+        snakeCurrentPosition.unshift(snakeCurrentPosition[0] + width)
+        snakeCurrentPosition.pop()
+        addSnake()
+      }
   
   
   }, speed) 
@@ -126,7 +138,7 @@ const snakeMove = () => {
 const handleKeyUp = (event) => {
   const key = event.keyCode // press button 
   //  
-  removeSnake(snakeCurrentPosition) // remove the cat from its current position
+  removeSnake(snakeCurrentPosition) 
   
  
   if (key === 39) {
@@ -138,13 +150,13 @@ const handleKeyUp = (event) => {
   } else if (key === 38) { 
     snakeDirection = 'up'
     snakeMove()
-  } else if (key === 40 && snakeCurrentPosition + width <= width * width - 1) { 
-    snakeCurrentPosition += width 
+  } else if (key === 40 ) { 
+    snakeDirection = 'down'
+    snakeMove() 
   } else {
-    // console.log(‘INVALID KEY’) // any other key, log invalid key
-  }
-//   console.log(‘POSITION AFTER REDEFINING —>’, catCurrentPosition)
-  addSnake(snakeCurrentPosition) // add cat to the new position that was defined in the if statement above
+   
+  } 
+  addSnake(snakeCurrentPosition) 
   
 
 }
@@ -155,7 +167,7 @@ const handleKeyUp = (event) => {
 document.addEventListener("keyup", handleKeyUp) // 
 
 createGrid(snakeStartPosition) // pass function the starting position of the cat
-
+snakeMove()
 // handleKeyUp()
 
 
