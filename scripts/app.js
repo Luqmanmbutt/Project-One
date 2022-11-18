@@ -8,15 +8,15 @@ function init() {
   const cells = [] // empty array to store our divs that we create
 
   const foodForSnake = "food" 
-  const foodStartPosition = Math.floor(Math.random() * 400)
-  // let foodCurrentPostion = 0
+  let foodStartPosition = Math.floor(Math.random() * 400)
+  // let foodCurrentPostion = 
 
   const snakeClass = "snake" // define the class of the character
   const snakeStartPosition = [44, 43, 42]// starting position of the cat (refers to an index)
   let snakeCurrentPosition = [224, 223, 222]  // use let to track where the cat currently is (refers to an 
   let snakeDirection = 'right'
   let snakeTimer 
-  const speed = 300
+  const speed = 100
 
 
   // * Make a grid
@@ -48,18 +48,35 @@ const checkFoodBeingEaten = () => {
   // if a variable returns booleans (true or false) you can write just the variable name, in the example below 
   // this will check if foodCheck is returning true
   // if you want to check foodCheck is false, you write it as: if (!foodCheck)
+  
+  
+  
   if (foodCheck == true) {
-    removeFood()
+    removeFood(foodStartPosition)
+    createsRandomFood()
+    addFood(foodStartPosition)
+    // next should be that you need to add a new number inside array Snakecurrentposition
+    // IMPORTANT NEXT STEP
     
-    // console.log('after', foodCheck)
+  
+  
+  
   }
-
   } 
 // if food check returns true then we need to remove foodforsnake
 // then we need to add random food to div with the following - addFood(foodStartPosition)
 
-const removeFood = () => { 
-  cells[foodStartPosition].classList.remove(foodForSnake)
+const createsRandomFood = () => {
+  foodStartPosition = Math.floor(Math.random() * 400)
+}
+
+
+
+
+
+
+const removeFood = (position) => { 
+  cells[position].classList.remove(foodForSnake)
   console.log('remove food is now working')
 }
 
@@ -102,7 +119,7 @@ const snakeMove = () => {
     
     if (snakeDirection === 'right' && snakeCurrentPosition[0] % width !== width - 1) {
       removeSnake()
-      // console.log('snakeCurrentPosition before', snakeCurrentPosition)
+      // console.log('snakeCurrentPosition before', snakeCurrentPosition) 
       snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) // add a new item (number) to the beginning of the array 
       snakeCurrentPosition.pop()
       // console.log('snakeCurrentPosition after', snakeCurrentPosition)
