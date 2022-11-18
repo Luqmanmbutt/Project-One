@@ -16,7 +16,7 @@ function init() {
   let snakeCurrentPosition = [224, 223, 222]  // use let to track where the cat currently is (refers to an 
   let snakeDirection = 'right'
   let snakeTimer 
-  const speed = 1000
+  const speed = 300
 
 
   // * Make a grid
@@ -28,7 +28,7 @@ function init() {
       cells.push(cell) // add the newly created div into our empty array
     }
 
-    addSnake(snakeStartPosition) // call the function to add the snake at its starting position
+    addSnake(snakeCurrentPosition) // call the function to add the snake at its starting position
     addFood(foodStartPosition) 
   }
     
@@ -38,13 +38,30 @@ const addFood = (position) => {
   cells[position].classList.add(foodForSnake)
 }
 
-const checkFoodBeingEatan = () => {
-  console.log('checkFoodBeingEatan', foodStartPosition)
+
+//snake head meeting the food
+//snakecurrentposition meaning the head being [0]
+const checkFoodBeingEaten = () => {
+  // console.log('checkFoodBeingEatan', foodStartPosition)q
+  const foodCheck = cells[snakeCurrentPosition[0]].classList.contains(foodForSnake)
+  // console.log('before', foodCheck)
+  // if a variable returns booleans (true or false) you can write just the variable name, in the example below 
+  // this will check if foodCheck is returning true
+  // if you want to check foodCheck is false, you write it as: if (!foodCheck)
+  if (foodCheck == true) {
+    removeFood()
+    
+    // console.log('after', foodCheck)
+  }
+
+  } 
+// if food check returns true then we need to remove foodforsnake
+// then we need to add random food to div with the following - addFood(foodStartPosition)
+
+const removeFood = () => { 
+  cells[foodStartPosition].classList.remove(foodForSnake)
+  console.log('remove food is now working')
 }
-checkFoodBeingEatan()
-
-// foodCurrentPostion = Math.floor(Math.random() * 100)
-
 
   const addSnake = () => { 
   /* snakeStartPosition is an array with 3 numbers [42, 43, 44] 
@@ -63,7 +80,7 @@ const removeSnake = () => {
     cells[x].classList.remove(snakeClass) 
   })
 
-}
+} 
 
 
 // remove the last element in the snake array 
@@ -75,7 +92,7 @@ const snakeMove = () => {
   snakeTimer = setInterval(() => {
     
     
-    checkFoodBeingEatan()
+    checkFoodBeingEaten()
     
     
     

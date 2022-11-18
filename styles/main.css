@@ -10,9 +10,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
     color: #000000;
-    border-color: black;
+    border-color: rgb(255, 0, 0);
+    background-image: url(../assets/background\ .jpeg);
   }
   
   .grid {
@@ -24,7 +25,8 @@ body {
     justify-content: center;
     height: 600px;
     width: 600px;
-    border-color: rgb(255, 255, 255);
+    border-color: rgb(255, 0, 0);
+    background-color: rgb(223, 223, 223);
     
   }
   
