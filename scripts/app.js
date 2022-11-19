@@ -11,11 +11,13 @@ function init() {
   let foodStartPosition = Math.floor(Math.random() * 400)
   // let foodCurrentPostion = 
 
+  
   const snakeClass = "snake" // define the class of the character
   const snakeStartPosition = [44, 43, 42]// starting position of the cat (refers to an index)
   let snakeCurrentPosition = [224, 223, 222]  // use let to track where the cat currently is (refers to an 
   let snakeDirection = 'right'
   let snakeTimer 
+
   const speed = 100
 
 
@@ -53,31 +55,34 @@ const checkFoodBeingEaten = () => {
   
   if (foodCheck == true) {
     removeFood(foodStartPosition)
+    growSnake()
     createsRandomFood()
     addFood(foodStartPosition)
     // next should be that you need to add a new number inside array Snakecurrentposition
     // IMPORTANT NEXT STEP
     
-  
-  
-  
+    // if food check returns true then we need to remove foodforsnake
+    // then we need to add random food to div with the following - addFood(foodStartPosition)
+    
+    
+    
   }
-  } 
-// if food check returns true then we need to remove foodforsnake
-// then we need to add random food to div with the following - addFood(foodStartPosition)
+} 
 
-const createsRandomFood = () => {
+// adding a number inside the last postion of the array (snakecurrentposition)
+//foodcurrentposition push into snakecurrentposition
+const growSnake = () => {
+  snakeCurrentPosition.push(foodStartPosition)
+}  
+
+
+ const createsRandomFood = () => {
   foodStartPosition = Math.floor(Math.random() * 400)
 }
 
 
-
-
-
-
 const removeFood = (position) => { 
   cells[position].classList.remove(foodForSnake)
-  console.log('remove food is now working')
 }
 
   const addSnake = () => { 
