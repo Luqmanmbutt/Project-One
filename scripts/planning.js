@@ -28,7 +28,16 @@
 //   keep adding the number from each direction ( right meaning add 1 continously) switch statement ??
 //   
 
-
+// GAMEOVER LOGIC 
+// 
+// game need to end when snake touches itself 
+//
+// make gameover function  done
+// when it touches itself (array) remove array done 
+// if head of snake meets number inside snake array done 
+// 
+// remove snake logic. not done 
+//
 
 
 

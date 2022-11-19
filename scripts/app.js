@@ -51,29 +51,34 @@ const checkFoodBeingEaten = () => {
   // this will check if foodCheck is returning true
   // if you want to check foodCheck is false, you write it as: if (!foodCheck)
   
-  
-  
   if (foodCheck == true) {
     removeFood(foodStartPosition)
-    growSnake()
+    snakeCurrentPosition.push(snakeCurrentPosition[1])
     createsRandomFood()
     addFood(foodStartPosition)
+    
     // next should be that you need to add a new number inside array Snakecurrentposition
     // IMPORTANT NEXT STEP
     
     // if food check returns true then we need to remove foodforsnake
     // then we need to add random food to div with the following - addFood(foodStartPosition)
-    
-    
-    
   }
 } 
 
+
+const gameOver = () => {
+  // console.log('im in the Else block')
+  const cell = document.createElement("h1") // create the div
+
+
+}
+
+
 // adding a number inside the last postion of the array (snakecurrentposition)
 //foodcurrentposition push into snakecurrentposition
-const growSnake = () => {
-  snakeCurrentPosition.push(foodStartPosition)
-}  
+// const growSnake = () => {
+//   snakeCurrentPosition.push(foodStartPosition)
+// }  
 
 
  const createsRandomFood = () => {
@@ -108,50 +113,52 @@ const removeSnake = () => {
 // remove the last element in the snake array 
 // * Move snake
 
-const snakeMove = () => {
+const moveSnake = () => {
   
   clearInterval(snakeTimer)
   snakeTimer = setInterval(() => {
     
-    
-    checkFoodBeingEaten()
-    
-    
-    
-    
-    
-    
-    
-    if (snakeDirection === 'right' && snakeCurrentPosition[0] % width !== width - 1) {
-      removeSnake()
-      // console.log('snakeCurrentPosition before', snakeCurrentPosition) 
-      snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) // add a new item (number) to the beginning of the array 
-      snakeCurrentPosition.pop()
-      // console.log('snakeCurrentPosition after', snakeCurrentPosition)
-      addSnake()
+  checkFoodBeingEaten()
+// gameOverSnake = array of snakecurrentposition[0] (made for the head)
+  const gameOverSnake = snakeCurrentPosition.filter(snake => {
+    return snake === snakeCurrentPosition[0]
+  })
+    console.log('gameOverSnake', gameOverSnake.length)
+  
+  
+  if (snakeDirection === 'right' && snakeCurrentPosition[0] % width !== width - 1 && gameOverSnake.length < 2) {
+    removeSnake()
+    // console.log('snakeCurrentPosition before', snakeCurrentPosition) 
+    snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) // add a new item (number) to the beginning of the array 
+    snakeCurrentPosition.pop()
+    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
+    addSnake()
 
-    } else if (snakeDirection === 'left' && snakeCurrentPosition[0] % width !== 0) {
+  } else if (snakeDirection === 'left' && snakeCurrentPosition[0] % width !== 0 && gameOverSnake.length < 2) {
+    removeSnake()
+    // console.log('snakeCurrentPosition before', snakeCurrentPosition)
+    snakeCurrentPosition.unshift(snakeCurrentPosition[0] - 1)
+    snakeCurrentPosition.pop()
+    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
+    addSnake() 
+  }
+    else if (snakeDirection === 'up' && snakeCurrentPosition[0] >= width && gameOverSnake.length < 2) {
+    removeSnake()
+    // console.log('snakeCurrentPosition before', snakeCurrentPosition)
+    snakeCurrentPosition.unshift(snakeCurrentPosition[0] - width)
+    snakeCurrentPosition.pop()
+    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
+    addSnake()
+  }
+    else if (snakeDirection === 'down' && snakeCurrentPosition[0] + width <= width * width - 1 && gameOverSnake.length < 2) {
       removeSnake()
-      // console.log('snakeCurrentPosition before', snakeCurrentPosition)
-      snakeCurrentPosition.unshift(snakeCurrentPosition[0] - 1)
+      snakeCurrentPosition.unshift(snakeCurrentPosition[0] + width)
       snakeCurrentPosition.pop()
-      // console.log('snakeCurrentPosition after', snakeCurrentPosition)
-      addSnake() 
-    }
-     else if (snakeDirection === 'up' && snakeCurrentPosition[0] >= width) {
-      removeSnake()
-      // console.log('snakeCurrentPosition before', snakeCurrentPosition)
-      snakeCurrentPosition.unshift(snakeCurrentPosition[0] - width)
-      snakeCurrentPosition.pop()
-      // console.log('snakeCurrentPosition after', snakeCurrentPosition)
       addSnake()
+    } else {
+      clearInterval(snakeTimer)
+      gameOver()
     }
-      else if (snakeDirection === 'down' && snakeCurrentPosition[0] + width <= width * width - 1) {
-        removeSnake()
-        snakeCurrentPosition.unshift(snakeCurrentPosition[0] + width)
-        snakeCurrentPosition.pop()
-        addSnake()
-      }
   
   
   }, speed) 
@@ -163,8 +170,8 @@ const snakeMove = () => {
 // The unshift() method adds new elements to the beginning of an array
 // The pop() method removes (pops) the last element of an array.
 // 44 % 10 = 4 without the remainder 
-// with the function snakeMove we are trying to make the snake move constantly right how we do that. 
-// the function snakeMove clear snake use the id returned from setInterval which is snakeTimer. 
+// with the function moveSnake we are trying to make the snake move constantly right how we do that. 
+// the function moveSnake clear snake use the id returned from setInterval which is snakeTimer. 
 // setINterval function saying if snakedirection equlas to right and snakecurrentposition is ([0](44)) 
 // - 1 to remove last snake 
 // snakecurrentposition.unshift means adding a new element in the begingin of the array which than adds +1
@@ -182,16 +189,16 @@ const handleKeyUp = (event) => {
  
   if (key === 39) {
     snakeDirection = 'right' 
-    snakeMove()
+    moveSnake()
   } else if (key === 37) { 
     snakeDirection = 'left'
-    snakeMove() 
+    moveSnake() 
   } else if (key === 38) { 
     snakeDirection = 'up'
-    snakeMove()
+    moveSnake()
   } else if (key === 40 ) { 
     snakeDirection = 'down'
-    snakeMove() 
+    moveSnake() 
   } else {
    
   } 
@@ -206,36 +213,8 @@ const handleKeyUp = (event) => {
 document.addEventListener("keyup", handleKeyUp) // 
 
 createGrid(snakeStartPosition) // pass function the starting position of the cat
-snakeMove()
+moveSnake()
 // handleKeyUp()
-
-
-// MOVE SNAKE CONSTANTLY ----------- work on this after creating a new variable -- mae sure to change the variable name on the function below.
-
-// const handleKeyUp = (event) => {
-//   const key = event.keyCode // press button 
-//   //  
-//   removeSnake(snakeCurrentPosition) // remove the cat from its current position
-  
-//   // when firing handlekeyup both remove and add snake are being fired within the same function.
-// // removes the snake only after its fired again - line by line code- 
-//   if (key === 39 && snakeCurrentPosition % width !== width - 1) { // if the right arrow is pressed and the cat is not on the right edge
-//     snakeCurrentPosition++ // add 1 to the current position.
-//   } else if (key === 37) { // if the left arrow is pressed and the cat is not on the left edge
-//     snakeCurrentPosition-- // removes 1 from the current position
-//   } else if (key === 38 && snakeCurrentPosition >= width) { // if the up arrow is pressed and the cat is not on the top row
-//     snakeCurrentPosition -= width // minus 10 from current position
-//   } else if (key === 40 && snakeCurrentPosition + width <= width * width - 1) { // if the down arrow is pressed and the cat is not on the bottom row
-//     snakeCurrentPosition += width // adds 10 to current position
-//   } else {
-//     // console.log(‘INVALID KEY’) // any other key, log invalid key
-//   }
-// //   console.log(‘POSITION AFTER REDEFINING —>’, catCurrentPosition)
-//   addSnake(snakeCurrentPosition) // add cat to the new position that was defined in the if statement above
-  
-
-// }
-
 
 
 
