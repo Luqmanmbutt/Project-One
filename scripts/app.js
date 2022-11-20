@@ -2,7 +2,6 @@ function init() {
   
   // * Variables
   const grid = document.querySelector(".grid") // get the grid element
-  
   const width = 20 // define the width ---- YOU STORE THINGS INSIDE A VARIABLE.
   const cellCount = width * width // define the number of cells on the grid
   const cells = [] // empty array to store our divs that we create
@@ -25,7 +24,6 @@ function init() {
   const createGrid = (snakeStartPosition) => {
     for (let I = 0; I < cellCount; I++) { // i starts at 0, i less than 100, adds 1 
       const cell = document.createElement("div") // create the div
-      cell.innerText = I // inner text of the div to be its index
       grid.appendChild(cell) // make the cell a child of the grid element we grabbed above
       cells.push(cell) // add the newly created div into our empty array
     }
@@ -33,6 +31,8 @@ function init() {
     addSnake(snakeCurrentPosition) // call the function to add the snake at its starting position
     addFood(foodStartPosition) 
   }
+
+
     
 // Add food 
 
@@ -67,9 +67,14 @@ const checkFoodBeingEaten = () => {
 
 
 const gameOver = () => {
-  // console.log('im in the Else block')
-  const cell = document.createElement("h1") // create the div
+  document.removeEventListener("keyup", handleKeyUp)  
+  const gameOverMessage = document.createElement("h1") // create the div
+  grid.appendChild(gameOverMessage)
+  gameOverMessage.innerText = 'GAMEOVER' // inner text of the div to be its index
+  gameOverMessage.className = 'end-message'
+  
 
+  console.log('message pop up after snake dies', gameOverMessage)
 
 }
 
@@ -119,7 +124,6 @@ const moveSnake = () => {
   snakeTimer = setInterval(() => {
     
   checkFoodBeingEaten()
-// gameOverSnake = array of snakecurrentposition[0] (made for the head)
   const gameOverSnake = snakeCurrentPosition.filter(snake => {
     return snake === snakeCurrentPosition[0]
   })
@@ -128,26 +132,20 @@ const moveSnake = () => {
   
   if (snakeDirection === 'right' && snakeCurrentPosition[0] % width !== width - 1 && gameOverSnake.length < 2) {
     removeSnake()
-    // console.log('snakeCurrentPosition before', snakeCurrentPosition) 
-    snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) // add a new item (number) to the beginning of the array 
+    snakeCurrentPosition.unshift(snakeCurrentPosition[0] + 1) 
     snakeCurrentPosition.pop()
-    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
     addSnake()
 
   } else if (snakeDirection === 'left' && snakeCurrentPosition[0] % width !== 0 && gameOverSnake.length < 2) {
     removeSnake()
-    // console.log('snakeCurrentPosition before', snakeCurrentPosition)
     snakeCurrentPosition.unshift(snakeCurrentPosition[0] - 1)
     snakeCurrentPosition.pop()
-    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
     addSnake() 
   }
     else if (snakeDirection === 'up' && snakeCurrentPosition[0] >= width && gameOverSnake.length < 2) {
     removeSnake()
-    // console.log('snakeCurrentPosition before', snakeCurrentPosition)
     snakeCurrentPosition.unshift(snakeCurrentPosition[0] - width)
     snakeCurrentPosition.pop()
-    // console.log('snakeCurrentPosition after', snakeCurrentPosition)
     addSnake()
   }
     else if (snakeDirection === 'down' && snakeCurrentPosition[0] + width <= width * width - 1 && gameOverSnake.length < 2) {
@@ -159,34 +157,12 @@ const moveSnake = () => {
       clearInterval(snakeTimer)
       gameOver()
     }
-  
-  
   }, speed) 
-
-   
 }
 
-// 44 % 10 = 4 without the remainder 
-// The unshift() method adds new elements to the beginning of an array
-// The pop() method removes (pops) the last element of an array.
-// 44 % 10 = 4 without the remainder 
-// with the function moveSnake we are trying to make the snake move constantly right how we do that. 
-// the function moveSnake clear snake use the id returned from setInterval which is snakeTimer. 
-// setINterval function saying if snakedirection equlas to right and snakecurrentposition is ([0](44)) 
-// - 1 to remove last snake 
-// snakecurrentposition.unshift means adding a new element in the begingin of the array which than adds +1
-// to the array [0] while removing the last number from the array an adding the snake to the next move 
-//
-//
-
-
-
 const handleKeyUp = (event) => {
-  const key = event.keyCode // press button 
-  //  
+  const key = event.keyCode 
   removeSnake(snakeCurrentPosition) 
-  
- 
   if (key === 39) {
     snakeDirection = 'right' 
     moveSnake()
@@ -200,14 +176,9 @@ const handleKeyUp = (event) => {
     snakeDirection = 'down'
     moveSnake() 
   } else {
-   
   } 
   addSnake(snakeCurrentPosition) 
-  
-
 }
-
-
 
 // * Event listeners
 document.addEventListener("keyup", handleKeyUp) // 
