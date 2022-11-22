@@ -19,7 +19,7 @@ function init() {
   let snakeDirection = 'right'
   let snakeTimer 
 
-  const speed = 100
+  const speed = 120 
 
   let score = 0 
 
@@ -82,7 +82,7 @@ const gameOver = () => {
   document.removeEventListener("keyup", handleKeyUp)  
   const gameOverMessage = document.createElement("h1") 
   grid.appendChild(gameOverMessage)
-  gameOverMessage.innerText = 'GAME - OVER' 
+  gameOverMessage.innerText = 'GAME  OVER' 
   gameOverMessage.className = 'end-message'
   
 }

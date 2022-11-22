@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap');
 * {
     box-sizing: border-box;
   }
@@ -59,17 +59,27 @@ body {
     .end-message {
     color: aquamarine;
     margin-top: -490px;
+    font-size: 70px;
+    font-family: 'Rubik Distressed', cursive;
     
     
   }
   .the-score {
-    color:rgb(255, 255, 255);
+    font-family: 'Rubik Distressed', cursive;
+    color: aquamarine;
     width: 0px;
-    height: 512px;
+    height: 700px;
   }
 
   .play-again {
-    font-family: 'Nunito', sans-serif;
+    font-family: 'Rubik Distressed', cursive;
+    margin-left: 100px;
+    margin-top: -34px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: aquamarine;
+
+
   }
    
 
