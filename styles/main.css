@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+
 * {
     box-sizing: border-box;
   }
@@ -56,8 +58,18 @@ body {
 
     .end-message {
     color: aquamarine;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: -490px;
+    
     
   }
+  .the-score {
+    color:rgb(255, 255, 255);
+    width: 0px;
+    height: 512px;
+  }
+
+  .play-again {
+    font-family: 'Nunito', sans-serif;
+  }
+   
+
